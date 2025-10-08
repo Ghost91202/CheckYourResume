@@ -1,4 +1,4 @@
-import React from 'react'
+import type { FC } from 'react'
 
 interface Suggestion {
   type: "good" | "improve";
@@ -10,7 +10,7 @@ interface ATSProps {
   suggestions: Suggestion[];
 }
 
-const ATS: React.FC<ATSProps> = ({ score, suggestions }) => {
+const ATS: FC<ATSProps> = ( { score, suggestions } ) => {
   // Determine background gradient based on score
   const gradientClass = score > 69
     ? 'from-green-100'
@@ -33,7 +33,7 @@ const ATS: React.FC<ATSProps> = ({ score, suggestions }) => {
       : 'Needs Improvement';
 
   return (
-    <div className={`bg-gradient-to-b ${gradientClass} to-white rounded-2xl shadow-md w-full p-6`}>
+    <div className={`bg-gradient-to-b ${ gradientClass } to-white rounded-2xl shadow-md w-full p-6`}>
       {/* Top section with icon and headline */}
       <div className="flex items-center gap-4 mb-6">
         <img src={iconSrc} alt="ATS Score Icon" className="w-12 h-12" />
@@ -51,7 +51,7 @@ const ATS: React.FC<ATSProps> = ({ score, suggestions }) => {
 
         {/* Suggestions list */}
         <div className="space-y-3">
-          {suggestions.map((suggestion, index) => (
+          {suggestions.map( ( suggestion, index ) => (
             <div key={index} className="flex items-start gap-3">
               <img
                 src={suggestion.type === "good" ? "/icons/check.svg" : "/icons/warning.svg"}
@@ -62,7 +62,7 @@ const ATS: React.FC<ATSProps> = ({ score, suggestions }) => {
                 {suggestion.tip}
               </p>
             </div>
-          ))}
+          ) )}
         </div>
       </div>
 
