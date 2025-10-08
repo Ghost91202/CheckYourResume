@@ -149,3 +149,30 @@ docker run --rm -p 3000:3000 ai-resume-analyzer:local
 ```
 
 Want help wiring this up to Docker Hub, AWS ECR, or another registry? Tell me which provider and I can add credentials and an updated workflow.
+
+## Deploying to Vercel
+
+This project can be deployed to Vercel as a static build. Note: the project produces both client and server bundles (React Router server build). Vercel's static hosting can serve the client bundle. If you need the server bundle (SSR), you'll need a server platform (Vercel Serverless Functions, or an external server). Below are simple steps to deploy the client as a static site.
+
+1. Ensure the project builds locally:
+
+```bash
+npm ci
+npm run build
+```
+
+2. Confirm the client output is present in `build/client`.
+
+3. In the Vercel dashboard, create a new project and import this repository (or use the Vercel CLI).
+
+4. Configure the project build settings in the Vercel UI (or leave defaults and rely on `vercel.json`):
+
+  - Framework Preset: Other
+  - Build Command: npm run build
+  - Output Directory: build/client
+
+5. Deploy. Vercel will run the build and publish the static client. If your app is a single-page app (SPA) and uses client-side routing, the `vercel.json` included in the repo will rewrite all routes to `index.html`.
+
+Server bundle note:
+
+ - The repository also produces a server bundle at `build/server` (React Router server). If you need server rendering or server routes, you'll need to deploy the `build/server/index.js` on a Node host or convert server routes into Vercel Serverless Functions. I can help convert the server build into an API route on Vercel if you want.
