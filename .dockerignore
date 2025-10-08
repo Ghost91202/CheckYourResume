@@ -1,4 +1,15 @@
-.react-router
+node_modules
+build
+.git
+dist
+.github
+*.log
+npm-debug.log*
+Dockerfile
+/.vscode
+.idea
+public/readme
+**/src/**/*.ts.react-router
 build
 node_modules
 README.md

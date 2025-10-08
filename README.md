@@ -119,3 +119,33 @@ No license file is included in this repository. Add a `LICENSE` file if you wish
 ---
 
 If you'd like, I can also add a short CONTRIBUTING.md, a LICENSE, or small usage screenshots taken from `public/images` to the README. Tell me which you'd prefer next.
+
+## CI / CD
+
+This repository includes two GitHub Actions workflows:
+
+- `.github/workflows/ci.yml` — runs on push and pull requests to `main`. It installs dependencies, runs the TypeScript typecheck, builds the app, and uploads the `build/` folder as an artifact.
+- `.github/workflows/cd.yml` — runs on push to `main`. It builds the Docker image using the included `Dockerfile` and pushes it to GitHub Container Registry (GHCR) under `ghcr.io/<owner>/<repo>:latest`.
+
+Required secrets for CD (set in the repository Settings → Secrets):
+
+- No additional secrets required for pushing to GHCR when using the default `GITHUB_TOKEN`. If you prefer to use a personal access token, set `CR_PAT` and update the workflow to use it.
+
+How to use locally:
+
+1. Install and run the development server:
+
+```bash
+npm ci
+npm run dev
+```
+
+2. Build locally and run the production container:
+
+```bash
+npm run build
+docker build -t ai-resume-analyzer:local .
+docker run --rm -p 3000:3000 ai-resume-analyzer:local
+```
+
+Want help wiring this up to Docker Hub, AWS ECR, or another registry? Tell me which provider and I can add credentials and an updated workflow.
