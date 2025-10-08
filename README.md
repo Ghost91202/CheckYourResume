@@ -176,3 +176,9 @@ npm run build
 Server bundle note:
 
  - The repository also produces a server bundle at `build/server` (React Router server). If you need server rendering or server routes, you'll need to deploy the `build/server/index.js` on a Node host or convert server routes into Vercel Serverless Functions. I can help convert the server build into an API route on Vercel if you want.
+
+Vercel project settings note:
+
+ - I removed the `builds` configuration from `vercel.json` so that the Build and Development Settings you set in the Vercel project dashboard (Build Command and Output Directory) are applied. In the Vercel UI set:
+   - Build Command: npm run build
+   - Output Directory: build/client
